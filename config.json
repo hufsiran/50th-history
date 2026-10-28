@@ -1,0 +1,170 @@
+{
+  "title": "페르시아어·이란학과 50주년사",
+  "bgm": "assets/audio/bgm.mp3",
+  "volume": 0.45,
+  "autoTurnSeconds": 8,
+  "speedOptions": [
+    3,
+    5,
+    8,
+    12,
+    20,
+    30
+  ],
+  "flipDurationMs": 750,
+  "loop": false,
+  "doublePageMinWidth": 760,
+  "pageAspectRatio": 0.8076927251807307,
+  "toc": [
+    {
+      "page": 1,
+      "title": "표지"
+    },
+    {
+      "page": 2,
+      "title": "전체 목차"
+    },
+    {
+      "page": 5,
+      "title": "Ⅰ. 발간사 및 축사"
+    },
+    {
+      "page": 6,
+      "title": "발간사 · 유달승"
+    },
+    {
+      "page": 7,
+      "title": "축사"
+    },
+    {
+      "page": 23,
+      "title": "Ⅱ. 페르시아어·이란학과 50년의 자취"
+    },
+    {
+      "page": 24,
+      "title": "학과 소개"
+    },
+    {
+      "page": 26,
+      "title": "주요 연혁"
+    },
+    {
+      "page": 30,
+      "title": "교수진 소개·교류협정 대학"
+    },
+    {
+      "page": 31,
+      "title": "교과과정 소개"
+    },
+    {
+      "page": 32,
+      "title": "연도별 발간 서적"
+    },
+    {
+      "page": 40,
+      "title": "졸업생 현황"
+    },
+    {
+      "page": 43,
+      "title": "Ⅲ. 우리가 만들어 온 50년"
+    },
+    {
+      "page": 44,
+      "title": "학생회"
+    },
+    {
+      "page": 52,
+      "title": "추억의 소모임"
+    },
+    {
+      "page": 59,
+      "title": "이란 문화제 및 행사"
+    },
+    {
+      "page": 60,
+      "title": "노루즈 행사"
+    },
+    {
+      "page": 62,
+      "title": "페르시아 사진전"
+    },
+    {
+      "page": 63,
+      "title": "이란 문화탐방"
+    },
+    {
+      "page": 65,
+      "title": "페르시아어 말하기대회"
+    },
+    {
+      "page": 68,
+      "title": "페르시아어 번역대회"
+    },
+    {
+      "page": 70,
+      "title": "나와 우리의 대학 생활"
+    },
+    {
+      "page": 78,
+      "title": "나의 이란 생활"
+    },
+    {
+      "page": 91,
+      "title": "Ⅳ. 졸업사진 및 동문 명단"
+    },
+    {
+      "page": 92,
+      "title": "졸업사진"
+    },
+    {
+      "page": 100,
+      "title": "동문 명단"
+    },
+    {
+      "page": 108,
+      "title": "발간 정보"
+    }
+  ],
+  "links": [
+    {
+      "page": 61,
+      "url": "https://m.site.naver.com/2im1n",
+      "x": 80.269,
+      "y": 5.288,
+      "width": 9.572,
+      "height": 7.797,
+      "label": "61페이지 QR코드 관련 자료 열기",
+      "kind": "qr"
+    },
+    {
+      "page": 63,
+      "url": "https://m.site.naver.com/2im4y",
+      "x": 80.269,
+      "y": 5.288,
+      "width": 9.572,
+      "height": 7.797,
+      "label": "63페이지 QR코드 관련 자료 열기",
+      "kind": "qr"
+    },
+    {
+      "page": 67,
+      "url": "https://m.site.naver.com/2im7v",
+      "x": 80.269,
+      "y": 5.288,
+      "width": 9.572,
+      "height": 7.797,
+      "label": "67페이지 QR코드 관련 자료 열기",
+      "kind": "qr"
+    },
+    {
+      "page": 69,
+      "url": "https://m.site.naver.com/2im8Y",
+      "x": 80.269,
+      "y": 5.288,
+      "width": 9.572,
+      "height": 7.797,
+      "label": "69페이지 QR코드 관련 자료 열기",
+      "kind": "qr"
+    }
+  ]
+}
