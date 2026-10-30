@@ -5,8 +5,8 @@
   let pages,links;
   try{
     [pages,links]=await Promise.all([
-      fetch('pages.json').then(r=>{if(!r.ok)throw Error();return r.json();}),
-      fetch('config.json').then(r=>{if(!r.ok)throw Error();return r.json();}).then(c=>c.links||[])
+      fetch('pages.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error();return r.json();}),
+      fetch('config.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error();return r.json();}).then(c=>c.links||[])
     ]);
     if(!Array.isArray(pages)||!pages.length)throw Error();
   }catch{openButton.textContent='확대 불가';openButton.title='페이지 설정을 불러오지 못했습니다.';return;}

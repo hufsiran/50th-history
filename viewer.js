@@ -7,7 +7,7 @@
   const safeURL = value => { try { const u=new URL(value); return ['https:','http:','mailto:','tel:'].includes(u.protocol) ? u.href : null; } catch { return null; } };
   let config, pages;
   try {
-    const results=await Promise.all(['config.json','pages.json'].map(async path=>{const r=await fetch(path); if(!r.ok)throw Error(path); return r.json();}));
+    const results=await Promise.all(['config.json','pages.json'].map(async path=>{const r=await fetch(path,{cache:'no-cache'}); if(!r.ok)throw Error(path); return r.json();}));
     [config,pages]=results;
     if(!Array.isArray(pages)||!pages.length)throw Error('빈 페이지 목록');
   } catch(error) { $('loading').textContent='파일을 불러오지 못했습니다. GitHub Pages 주소로 접속하거나 안내문의 로컬 실행 방법을 확인해 주세요.'; console.error(error); return; }
@@ -31,8 +31,21 @@
   if(!$('speed').options.length)$('speed').add(new Option('8초',8));
   $('speed').value=String(config.autoTurnSeconds||8); if(!$('speed').value)$('speed').selectedIndex=0;
   $('pageInput').max=total; $('totalPages').textContent='/ '+total;
-  const anchor = index => !wide||index===0 ? index : index%2===0 ? index-1 : index;
-  const visible = index => wide ? index===0 ? [null,0] : [index,index+1<total?index+1:null] : [index];
+  // Keep the actual PDF's spreads together, including separate front/back covers.
+  const fallbackSpreads=[[null,0]];
+  for(let i=1;i<total;i+=2)fallbackSpreads.push([i,i+1<total?i+1:null]);
+  const supplied=config.spreadGroups;
+  const validSpreads=Array.isArray(supplied)&&supplied.every(g=>Array.isArray(g)&&g.length===2&&g.some(p=>p!==null)&&g.every(p=>p===null||(Number.isInteger(p)&&p>=1&&p<=total)))&&supplied.flat().filter(p=>p!==null).every((p,i)=>p===i+1)&&supplied.flat().filter(p=>p!==null).length===total;
+  const spreads=validSpreads?supplied.map(g=>g.map(p=>p===null?null:p-1)):fallbackSpreads;
+  const groupOf=new Map();spreads.forEach((g,k)=>g.forEach(p=>{if(p!==null)groupOf.set(p,k);}));
+  const firstPage=g=>g.find(p=>p!==null);
+  const anchor=index=>wide?firstPage(spreads[groupOf.get(index)]):index;
+  const visible=index=>wide?spreads[groupOf.get(index)]:[index];
+  const adjacent=(index,direction)=>{
+    if(!wide)return index+direction;
+    const group=groupOf.get(index)+direction;
+    return group<0?-1:group>=spreads.length?total:firstPage(spreads[group]);
+  };
   const resetClock=()=>{clock=performance.now();$('timerFill').style.width='0%';};
   function sheet(index,side='right') {
     const el=document.createElement('div'); el.className='sheet '+side;
@@ -83,8 +96,8 @@
     } else render(index);
     busy=false;update();resetClock();
   }
-  function next(manual=false) { if(manual)setPlaying(false); const n=wide?(current===0?1:current+2):current+1;if(n>=total){if(config.loop===true&&!manual)go(0,false);else setPlaying(false);}else go(n); }
-  function prev() {setPlaying(false);go(wide?(current<=1?0:current-2):current-1);}
+  function next(manual=false) { if(manual)setPlaying(false); const n=adjacent(current,1);if(n>=total){if(config.loop===true&&!manual)go(0,false);else setPlaying(false);}else go(n); }
+  function prev() {setPlaying(false);go(Math.max(0,adjacent(current,-1)));}
   function setPlaying(value){playing=!!value;resetClock();$('play').textContent=playing?'❚❚ 일시정지':'▶ 자동 넘김';$('play').setAttribute('aria-pressed',String(playing));}
   async function setMusic(value) {
     musicWanted=!!value;
